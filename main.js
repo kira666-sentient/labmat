@@ -2,13 +2,13 @@
 // Complete Application JavaScript
 
 // ===== Configuration =====
-// Set USE_LOCAL to true for local development, false for Vercel
+// Auto-detects local vs deployed environment
+const isLocal =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1";
+
 const CONFIG = {
-  API_URL: "/api/run",
-  LOCAL_API: "http://localhost:5000/api/run",
-  USE_LOCAL:
-    window.location.hostname === "localhost" ||
-    window.location.hostname === "127.0.0.1",
+  API_URL: isLocal ? "http://localhost:5000/api/run" : "/api/run",
 };
 
 // ===== Practicals Data =====
@@ -1644,8 +1644,7 @@ async function runCode() {
   showLoading(true);
 
   try {
-    const apiUrl = CONFIG.USE_LOCAL ? CONFIG.LOCAL_API : CONFIG.API_URL;
-    const response = await fetch(apiUrl, {
+    const response = await fetch(CONFIG.API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ code }),
