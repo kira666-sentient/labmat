@@ -178,29 +178,29 @@ grid on;`,
 
             <h4>📊 Steady-State Error</h4>
             <table style="width:100%; border-collapse: collapse; margin: 16px 0;">
-                <tr style="background: var(--bg-tertiary);">
-                    <th style="padding: 10px; border: 1px solid var(--border-color);">Input</th>
-                    <th style="padding: 10px; border: 1px solid var(--border-color);">Type 0</th>
-                    <th style="padding: 10px; border: 1px solid var(--border-color);">Type 1</th>
-                    <th style="padding: 10px; border: 1px solid var(--border-color);">Type 2</th>
+                <tr style="background: var(--surface);">
+                    <th style="padding: 10px; border: 1px solid var(--border);">Input</th>
+                    <th style="padding: 10px; border: 1px solid var(--border);">Type 0</th>
+                    <th style="padding: 10px; border: 1px solid var(--border);">Type 1</th>
+                    <th style="padding: 10px; border: 1px solid var(--border);">Type 2</th>
                 </tr>
                 <tr>
-                    <td style="padding: 10px; border: 1px solid var(--border-color);">Step</td>
-                    <td style="padding: 10px; border: 1px solid var(--border-color);">1/(1+Kp)</td>
-                    <td style="padding: 10px; border: 1px solid var(--border-color);">0</td>
-                    <td style="padding: 10px; border: 1px solid var(--border-color);">0</td>
+                    <td style="padding: 10px; border: 1px solid var(--border);">Step</td>
+                    <td style="padding: 10px; border: 1px solid var(--border);">1/(1+Kp)</td>
+                    <td style="padding: 10px; border: 1px solid var(--border);">0</td>
+                    <td style="padding: 10px; border: 1px solid var(--border);">0</td>
                 </tr>
                 <tr>
-                    <td style="padding: 10px; border: 1px solid var(--border-color);">Ramp</td>
-                    <td style="padding: 10px; border: 1px solid var(--border-color);">∞</td>
-                    <td style="padding: 10px; border: 1px solid var(--border-color);">1/Kv</td>
-                    <td style="padding: 10px; border: 1px solid var(--border-color);">0</td>
+                    <td style="padding: 10px; border: 1px solid var(--border);">Ramp</td>
+                    <td style="padding: 10px; border: 1px solid var(--border);">∞</td>
+                    <td style="padding: 10px; border: 1px solid var(--border);">1/Kv</td>
+                    <td style="padding: 10px; border: 1px solid var(--border);">0</td>
                 </tr>
                 <tr>
-                    <td style="padding: 10px; border: 1px solid var(--border-color);">Parabola</td>
-                    <td style="padding: 10px; border: 1px solid var(--border-color);">∞</td>
-                    <td style="padding: 10px; border: 1px solid var(--border-color);">∞</td>
-                    <td style="padding: 10px; border: 1px solid var(--border-color);">1/Ka</td>
+                    <td style="padding: 10px; border: 1px solid var(--border);">Parabola</td>
+                    <td style="padding: 10px; border: 1px solid var(--border);">∞</td>
+                    <td style="padding: 10px; border: 1px solid var(--border);">∞</td>
+                    <td style="padding: 10px; border: 1px solid var(--border);">1/Ka</td>
                 </tr>
             </table>
 
@@ -431,21 +431,21 @@ grid on;`,
 
             <h4>🎛️ Controller Effects</h4>
             <table style="width:100%; border-collapse: collapse; margin: 16px 0;">
-                <tr style="background: var(--bg-tertiary);">
-                    <th style="padding: 10px; border: 1px solid var(--border-color);">Control</th>
-                    <th style="padding: 10px; border: 1px solid var(--border-color);">Effect</th>
+                <tr style="background: var(--surface);">
+                    <th style="padding: 10px; border: 1px solid var(--border);">Control</th>
+                    <th style="padding: 10px; border: 1px solid var(--border);">Effect</th>
                 </tr>
                 <tr>
-                    <td style="padding: 10px; border: 1px solid var(--border-color);"><strong>P (Proportional)</strong></td>
-                    <td style="padding: 10px; border: 1px solid var(--border-color);">Reduces error but cannot eliminate it. May increase overshoot.</td>
+                    <td style="padding: 10px; border: 1px solid var(--border);"><strong>P (Proportional)</strong></td>
+                    <td style="padding: 10px; border: 1px solid var(--border);">Reduces error but cannot eliminate it. May increase overshoot.</td>
                 </tr>
                 <tr>
-                    <td style="padding: 10px; border: 1px solid var(--border-color);"><strong>I (Integral)</strong></td>
-                    <td style="padding: 10px; border: 1px solid var(--border-color);">Eliminates steady-state error. Adds pole at origin. May reduce stability.</td>
+                    <td style="padding: 10px; border: 1px solid var(--border);"><strong>I (Integral)</strong></td>
+                    <td style="padding: 10px; border: 1px solid var(--border);">Eliminates steady-state error. Adds pole at origin. May reduce stability.</td>
                 </tr>
                 <tr>
-                    <td style="padding: 10px; border: 1px solid var(--border-color);"><strong>D (Derivative)</strong></td>
-                    <td style="padding: 10px; border: 1px solid var(--border-color);">Adds damping, reduces overshoot. Adds a zero. Improves stability.</td>
+                    <td style="padding: 10px; border: 1px solid var(--border);"><strong>D (Derivative)</strong></td>
+                    <td style="padding: 10px; border: 1px solid var(--border);">Adds damping, reduces overshoot. Adds a zero. Improves stability.</td>
                 </tr>
             </table>
 
@@ -776,29 +776,29 @@ G = tf(num, den);  % Create transfer function</pre>
 
             <h4>📋 Error Table (MEMORIZE THIS!)</h4>
             <table style="width:100%; border-collapse: collapse; margin: 12px 0; font-size: 0.9rem;">
-                <tr style="background: var(--bg-tertiary);">
-                    <th style="padding: 8px; border: 1px solid var(--border-color);">Input</th>
-                    <th style="padding: 8px; border: 1px solid var(--border-color);">Type 0</th>
-                    <th style="padding: 8px; border: 1px solid var(--border-color);">Type 1</th>
-                    <th style="padding: 8px; border: 1px solid var(--border-color);">Type 2</th>
+                <tr style="background: var(--surface);">
+                    <th style="padding: 8px; border: 1px solid var(--border);">Input</th>
+                    <th style="padding: 8px; border: 1px solid var(--border);">Type 0</th>
+                    <th style="padding: 8px; border: 1px solid var(--border);">Type 1</th>
+                    <th style="padding: 8px; border: 1px solid var(--border);">Type 2</th>
                 </tr>
                 <tr>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">Step (1/s)</td>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">1/(1+Kp)</td>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">0</td>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">0</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">Step (1/s)</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">1/(1+Kp)</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">0</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">0</td>
                 </tr>
                 <tr>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">Ramp (1/s²)</td>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">∞</td>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">1/Kv</td>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">0</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">Ramp (1/s²)</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">∞</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">1/Kv</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">0</td>
                 </tr>
                 <tr>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">Parabola (1/s³)</td>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">∞</td>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">∞</td>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">1/Ka</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">Parabola (1/s³)</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">∞</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">∞</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">1/Ka</td>
                 </tr>
             </table>
 
@@ -900,35 +900,35 @@ rlocfind(G);  % Click on plot to find K value</pre>
 
             <h4>📝 Bode Plot Sketching Rules</h4>
             <table style="width:100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem;">
-                <tr style="background: var(--bg-tertiary);">
-                    <th style="padding: 8px; border: 1px solid var(--border-color);">Term</th>
-                    <th style="padding: 8px; border: 1px solid var(--border-color);">Magnitude</th>
-                    <th style="padding: 8px; border: 1px solid var(--border-color);">Phase</th>
+                <tr style="background: var(--surface);">
+                    <th style="padding: 8px; border: 1px solid var(--border);">Term</th>
+                    <th style="padding: 8px; border: 1px solid var(--border);">Magnitude</th>
+                    <th style="padding: 8px; border: 1px solid var(--border);">Phase</th>
                 </tr>
                 <tr>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">K (gain)</td>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">20·log(K) constant</td>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">0°</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">K (gain)</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">20·log(K) constant</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">0°</td>
                 </tr>
                 <tr>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">s (zero at origin)</td>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">+20 dB/decade</td>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">+90°</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">s (zero at origin)</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">+20 dB/decade</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">+90°</td>
                 </tr>
                 <tr>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">1/s (pole at origin)</td>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">-20 dB/decade</td>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">-90°</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">1/s (pole at origin)</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">-20 dB/decade</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">-90°</td>
                 </tr>
                 <tr>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">(1+s/ω) zero</td>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">+20 dB/dec after ω</td>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">0° to +90°</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">(1+s/ω) zero</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">+20 dB/dec after ω</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">0° to +90°</td>
                 </tr>
                 <tr>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">1/(1+s/ω) pole</td>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">-20 dB/dec after ω</td>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">0° to -90°</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">1/(1+s/ω) pole</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">-20 dB/dec after ω</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">0° to -90°</td>
                 </tr>
             </table>
 
@@ -998,33 +998,33 @@ rlocfind(G);  % Click on plot to find K value</pre>
 
             <h4>🎯 Effect of Each Term</h4>
             <table style="width:100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem;">
-                <tr style="background: var(--bg-tertiary);">
-                    <th style="padding: 8px; border: 1px solid var(--border-color);">Term</th>
-                    <th style="padding: 8px; border: 1px solid var(--border-color);">Rise Time</th>
-                    <th style="padding: 8px; border: 1px solid var(--border-color);">Overshoot</th>
-                    <th style="padding: 8px; border: 1px solid var(--border-color);">Settling</th>
-                    <th style="padding: 8px; border: 1px solid var(--border-color);">SS Error</th>
+                <tr style="background: var(--surface);">
+                    <th style="padding: 8px; border: 1px solid var(--border);">Term</th>
+                    <th style="padding: 8px; border: 1px solid var(--border);">Rise Time</th>
+                    <th style="padding: 8px; border: 1px solid var(--border);">Overshoot</th>
+                    <th style="padding: 8px; border: 1px solid var(--border);">Settling</th>
+                    <th style="padding: 8px; border: 1px solid var(--border);">SS Error</th>
                 </tr>
                 <tr>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">↑ Kp</td>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">↓</td>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">↑</td>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">Small Δ</td>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">↓</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">↑ Kp</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">↓</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">↑</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">Small Δ</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">↓</td>
                 </tr>
                 <tr>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">↑ Ki</td>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">↓</td>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">↑</td>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">↑</td>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">Eliminates</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">↑ Ki</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">↓</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">↑</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">↑</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">Eliminates</td>
                 </tr>
                 <tr>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">↑ Kd</td>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">Small Δ</td>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">↓</td>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">↓</td>
-                    <td style="padding: 8px; border: 1px solid var(--border-color);">No effect</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">↑ Kd</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">Small Δ</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">↓</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">↓</td>
+                    <td style="padding: 8px; border: 1px solid var(--border);">No effect</td>
                 </tr>
             </table>
 
@@ -1138,6 +1138,7 @@ let state = {
   currentTutorTopic: 0,
   explainMode: false,
   sidebarOpen: false,
+  isInitialized: false,
 };
 
 // ===== DOM Elements =====
@@ -1150,10 +1151,26 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function initApp() {
+  // On mobile, ensure sidebar starts closed
+  // On desktop, sidebar is visible by default (no collapsed class)
+  if (window.innerWidth <= 768) {
+    closeSidebar();
+  } else {
+    // Desktop: sidebar visible by default
+    state.sidebarOpen = true;
+  }
+
   renderPracticalsList();
   setupEventListeners();
   updateLineNumbers();
   renderTutorTopics();
+
+  // Handle window resize - close mobile sidebar when resizing to desktop
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 768 && state.sidebarOpen) {
+      closeSidebar();
+    }
+  });
 
   // Initialize KaTeX rendering
   if (typeof renderMathInElement !== "undefined") {
@@ -1169,6 +1186,21 @@ function initApp() {
           });
         });
     }, 100);
+  }
+
+  // Mark as initialized
+  state.isInitialized = true;
+
+  // Sync line numbers on load
+  syncLineNumberScroll();
+}
+
+// Sync line numbers scroll position with editor
+function syncLineNumberScroll() {
+  const editor = $("#code-editor");
+  const lineNumbers = $("#line-numbers");
+  if (editor && lineNumbers) {
+    lineNumbers.scrollTop = editor.scrollTop;
   }
 }
 
@@ -1359,10 +1391,16 @@ function getGenericExplanation(line) {
 
 // ===== Event Listeners =====
 function setupEventListeners() {
-  // Mobile menu toggle
+  // Sidebar toggle - mobile and desktop
   $("#menu-toggle").addEventListener("click", toggleSidebar);
   $("#sidebar-overlay").addEventListener("click", closeSidebar);
   $("#sidebar-close").addEventListener("click", closeSidebar);
+
+  // Desktop sidebar toggle button
+  const sidebarToggle = $("#sidebar-toggle");
+  if (sidebarToggle) {
+    sidebarToggle.addEventListener("click", toggleSidebar);
+  }
 
   // Practicals list
   $("#practicals-list").addEventListener("click", (e) => {
@@ -1399,7 +1437,10 @@ function setupEventListeners() {
     if (state.explainMode) renderExplanations();
   });
   editor.addEventListener("scroll", () => {
-    $("#line-numbers").scrollTop = editor.scrollTop;
+    const lineNumbers = $("#line-numbers");
+    if (lineNumbers) {
+      lineNumbers.scrollTop = editor.scrollTop;
+    }
   });
   editor.addEventListener("keydown", (e) => {
     if (e.key === "Tab") {
@@ -1414,11 +1455,86 @@ function setupEventListeners() {
 
   // Keyboard shortcuts
   document.addEventListener("keydown", (e) => {
+    // Run code: Ctrl/Cmd + Enter
     if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
       e.preventDefault();
       runCode();
     }
+
+    // Show shortcuts: ? key (when not typing in editor)
+    if (e.key === "?" && document.activeElement !== $("#code-editor")) {
+      e.preventDefault();
+      openShortcuts();
+    }
+
+    // Escape key: Close sidebar, modals, fullscreen
+    if (e.key === "Escape") {
+      // Close shortcuts modal if open
+      const shortcutsModal = $("#shortcuts-modal");
+      if (shortcutsModal && shortcutsModal.classList.contains("active")) {
+        closeShortcuts();
+        return;
+      }
+
+      // Close sidebar if open
+      if (state.sidebarOpen) {
+        closeSidebar();
+        return;
+      }
+
+      // Close tutor modal if open
+      const tutorModal = $("#tutor-modal");
+      if (tutorModal && tutorModal.classList.contains("active")) {
+        closeTutor();
+        return;
+      }
+
+      // Close explain sidebar if open
+      if (state.explainMode) {
+        state.explainMode = false;
+        $("#explain-toggle").checked = false;
+        $("#explain-sidebar").classList.remove("open");
+        return;
+      }
+
+      // Exit fullscreen editor if active
+      const editorPanel = $(".editor-panel");
+      if (editorPanel && editorPanel.classList.contains("fullscreen")) {
+        editorPanel.classList.remove("fullscreen");
+        return;
+      }
+    }
+
+    // Toggle sidebar: Ctrl/Cmd + B
+    if ((e.ctrlKey || e.metaKey) && (e.key === "b" || e.key === "B")) {
+      e.preventDefault();
+      toggleSidebar();
+    }
+
+    // Clear editor: Ctrl/Cmd + Shift + Delete
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === "Delete") {
+      e.preventDefault();
+      clearEditor();
+    }
   });
+
+  // Shortcuts modal
+  const shortcutsBtn = $("#shortcuts-btn");
+  if (shortcutsBtn) {
+    shortcutsBtn.addEventListener("click", openShortcuts);
+  }
+
+  const closeShortcutsBtn = $("#close-shortcuts");
+  if (closeShortcutsBtn) {
+    closeShortcutsBtn.addEventListener("click", closeShortcuts);
+  }
+
+  const shortcutsModal = $("#shortcuts-modal");
+  if (shortcutsModal) {
+    shortcutsModal.addEventListener("click", (e) => {
+      if (e.target === shortcutsModal) closeShortcuts();
+    });
+  }
 
   // Tabs
   $("#output-tabs").addEventListener("click", (e) => {
@@ -1608,17 +1724,44 @@ function switchTab(tabName) {
 }
 
 function toggleSidebar() {
-  state.sidebarOpen = !state.sidebarOpen;
-  $("#sidebar").classList.toggle("open", state.sidebarOpen);
-  $("#sidebar-overlay").classList.toggle("active", state.sidebarOpen);
-  $("#menu-toggle").classList.toggle("active", state.sidebarOpen);
+  const isMobile = window.innerWidth <= 768;
+  const sidebar = $("#sidebar");
+  const overlay = $("#sidebar-overlay");
+  const menuToggle = $("#menu-toggle");
+
+  if (isMobile) {
+    // Mobile: use .open class and transform
+    state.sidebarOpen = !state.sidebarOpen;
+    if (sidebar) sidebar.classList.toggle("open", state.sidebarOpen);
+    if (overlay) overlay.classList.toggle("active", state.sidebarOpen);
+    if (menuToggle) menuToggle.classList.toggle("active", state.sidebarOpen);
+    document.body.style.overflow = state.sidebarOpen ? "hidden" : "";
+  } else {
+    // Desktop: use .collapsed class and margin
+    if (sidebar) {
+      sidebar.classList.toggle("collapsed");
+      state.sidebarOpen = !sidebar.classList.contains("collapsed");
+    }
+  }
 }
 
 function closeSidebar() {
-  state.sidebarOpen = false;
-  $("#sidebar").classList.remove("open");
-  $("#sidebar-overlay").classList.remove("active");
-  $("#menu-toggle").classList.remove("active");
+  const isMobile = window.innerWidth <= 768;
+  const sidebar = $("#sidebar");
+  const overlay = $("#sidebar-overlay");
+  const menuToggle = $("#menu-toggle");
+
+  if (isMobile) {
+    state.sidebarOpen = false;
+    if (sidebar) sidebar.classList.remove("open");
+    if (overlay) overlay.classList.remove("active");
+    if (menuToggle) menuToggle.classList.remove("active");
+    document.body.style.overflow = "";
+  } else {
+    // Desktop: add collapsed class to hide
+    if (sidebar) sidebar.classList.add("collapsed");
+    state.sidebarOpen = false;
+  }
 }
 
 function openTutor() {
@@ -1631,9 +1774,40 @@ function closeTutor() {
   $("#tutor-modal").classList.remove("active");
 }
 
+function openShortcuts() {
+  const modal = $("#shortcuts-modal");
+  if (modal) {
+    modal.classList.add("active");
+  }
+}
+
+function closeShortcuts() {
+  const modal = $("#shortcuts-modal");
+  if (modal) {
+    modal.classList.remove("active");
+  }
+}
+
 function updateLineNumbers() {
-  const lines = $("#code-editor").value.split("\n");
-  $("#line-numbers").textContent = lines.map((_, i) => i + 1).join("\n");
+  const editor = $("#code-editor");
+  const lineNumbers = $("#line-numbers");
+
+  if (!editor || !lineNumbers) return;
+
+  const lines = editor.value.split("\n");
+  const lineCount = lines.length;
+
+  // Generate line numbers as a single string with newlines
+  let lineNumberText = "";
+  for (let i = 1; i <= lineCount; i++) {
+    lineNumberText += i + "\n";
+  }
+
+  // Remove trailing newline
+  lineNumbers.textContent = lineNumberText.trimEnd();
+
+  // Sync scroll position
+  lineNumbers.scrollTop = editor.scrollTop;
 }
 
 function showLoading(show) {

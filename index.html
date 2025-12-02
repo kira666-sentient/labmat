@@ -122,6 +122,24 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Sidebar Footer -->
+                <div class="sidebar-footer">
+                    <div
+                        class="shortcuts-hint"
+                        id="shortcuts-btn"
+                        title="View keyboard shortcuts"
+                    >
+                        <kbd>?</kbd>
+                        <span>Keyboard Shortcuts</span>
+                    </div>
+                    <div class="credits">
+                        <p>
+                            Made with ♥ by
+                            <a href="#" id="credits-link">Karan Gupta</a>
+                        </p>
+                    </div>
+                </div>
             </aside>
 
             <!-- Main Content -->
@@ -129,6 +147,22 @@
                 <!-- Top Bar -->
                 <header class="topbar">
                     <div class="topbar-left">
+                        <button
+                            class="icon-btn"
+                            id="sidebar-toggle"
+                            title="Toggle Sidebar (Ctrl+B)"
+                        >
+                            <svg
+                                width="18"
+                                height="18"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                            >
+                                <path d="M3 12h18M3 6h18M3 18h18" />
+                            </svg>
+                        </button>
                         <button class="btn btn-primary" id="run-btn">
                             <svg
                                 width="16"
@@ -405,6 +439,50 @@ Supported commands:
                         <button class="btn btn-primary" id="tutor-next">
                             Next →
                         </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Keyboard Shortcuts Modal -->
+        <div class="modal-overlay shortcuts-modal" id="shortcuts-modal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h2>⌨️ Keyboard Shortcuts</h2>
+                    <button class="modal-close" id="close-shortcuts">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="shortcuts-list">
+                        <div class="shortcut-item">
+                            <span>Run Code</span>
+                            <div class="shortcut-keys">
+                                <kbd>Ctrl</kbd><kbd>Enter</kbd>
+                            </div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span>Toggle Sidebar</span>
+                            <div class="shortcut-keys">
+                                <kbd>Ctrl</kbd><kbd>B</kbd>
+                            </div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span>Clear Editor</span>
+                            <div class="shortcut-keys">
+                                <kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>Del</kbd>
+                            </div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span>Close Modal / Exit Fullscreen</span>
+                            <div class="shortcut-keys">
+                                <kbd>Esc</kbd>
+                            </div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span>Show Shortcuts</span>
+                            <div class="shortcut-keys">
+                                <kbd>?</kbd>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
