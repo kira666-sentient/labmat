@@ -5,7 +5,7 @@
 const CONFIG = {
   API_URL: "/api/run",
   LOCAL_API: "http://localhost:5000/api/run",
-  USE_LOCAL: true, // Set to false for Vercel deployment
+  USE_LOCAL: false, // Set to false for Vercel deployment
 };
 
 // ===== Practicals Data =====
