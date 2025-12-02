@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+        <title>MATLAB-Lite | Control Systems IDE</title>
+        <link rel="stylesheet" href="style.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+        <!-- KaTeX for math rendering -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+        />
+        <script
+            defer
+            src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+        ></script>
+        <script
+            defer
+            src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        ></script>
+    </head>
+    <body>
+        <div class="app" id="app">
+            <!-- Mobile Header -->
+            <header class="mobile-header">
+                <button
+                    class="hamburger"
+                    id="menu-toggle"
+                    aria-label="Toggle menu"
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <h1>⚡ MATLAB-Lite</h1>
+                <button class="mobile-run-btn" id="mobile-run">▶</button>
+            </header>
+
+            <!-- Sidebar Overlay for mobile -->
+            <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+            <!-- Sidebar -->
+            <aside class="sidebar" id="sidebar">
+                <div class="sidebar-header">
+                    <div class="logo">
+                        <span class="logo-icon">⚡</span>
+                        <div class="logo-text">
+                            <h1>MATLAB-Lite</h1>
+                            <p>Control Systems IDE</p>
+                        </div>
+                    </div>
+                    <button class="sidebar-close" id="sidebar-close">×</button>
+                </div>
+
+                <!-- Tutor Mode Button -->
+                <button class="tutor-btn" id="tutor-btn">
+                    <span class="tutor-icon">🎓</span>
+                    <span class="tutor-text">Control System Tutor</span>
+                    <span class="tutor-badge">NEW</span>
+                </button>
+
+                <div class="sidebar-content">
+                    <div class="section-header">
+                        <span>📚 Practicals</span>
+                    </div>
+                    <ul class="practicals-list" id="practicals-list">
+                        <!-- Populated by JS -->
+                    </ul>
+
+                    <div class="section-header">
+                        <span>⌨️ Quick Reference</span>
+                    </div>
+                    <div class="quick-ref">
+                        <div class="ref-item" data-cmd="tf(num, den)">
+                            <code>tf(num, den)</code>
+                            <span>Transfer Function</span>
+                        </div>
+                        <div class="ref-item" data-cmd="feedback(G, 1)">
+                            <code>feedback(G, 1)</code>
+                            <span>Unity Feedback</span>
+                        </div>
+                        <div class="ref-item" data-cmd="step(T)">
+                            <code>step(T)</code>
+                            <span>Step Response</span>
+                        </div>
+                        <div class="ref-item" data-cmd="impulse(T)">
+                            <code>impulse(T)</code>
+                            <span>Impulse Response</span>
+                        </div>
+                        <div class="ref-item" data-cmd="bode(G)">
+                            <code>bode(G)</code>
+                            <span>Bode Plot</span>
+                        </div>
+                        <div class="ref-item" data-cmd="rlocus(G)">
+                            <code>rlocus(G)</code>
+                            <span>Root Locus</span>
+                        </div>
+                        <div class="ref-item" data-cmd="nyquist(G)">
+                            <code>nyquist(G)</code>
+                            <span>Nyquist Plot</span>
+                        </div>
+                        <div class="ref-item" data-cmd="pzmap(G)">
+                            <code>pzmap(G)</code>
+                            <span>Pole-Zero Map</span>
+                        </div>
+                        <div class="ref-item" data-cmd="margin(G)">
+                            <code>margin(G)</code>
+                            <span>Stability Margins</span>
+                        </div>
+                        <div class="ref-item" data-cmd="conv([1 2], [1 3])">
+                            <code>conv(a, b)</code>
+                            <span>Polynomial Multiply</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main">
+                <!-- Top Bar -->
+                <header class="topbar">
+                    <div class="topbar-left">
+                        <button class="btn btn-primary" id="run-btn">
+                            <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                            >
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                            <span>Run</span>
+                        </button>
+                        <button class="btn btn-secondary" id="clear-btn">
+                            <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                            >
+                                <path
+                                    d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"
+                                />
+                            </svg>
+                            <span>Clear</span>
+                        </button>
+                    </div>
+                    <div class="topbar-center">
+                        <div class="current-practical" id="current-practical">
+                            <span class="practical-label"
+                                >Select a practical to begin</span
+                            >
+                        </div>
+                    </div>
+                    <div class="topbar-right">
+                        <label class="switch">
+                            <input type="checkbox" id="explain-toggle" />
+                            <span class="slider"></span>
+                        </label>
+                        <span class="switch-label">💡 Explain</span>
+                    </div>
+                </header>
+
+                <!-- Content Area -->
+                <div class="content">
+                    <!-- Editor Panel -->
+                    <div class="panel editor-panel">
+                        <div class="panel-header">
+                            <div class="panel-title">
+                                <svg
+                                    width="18"
+                                    height="18"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path d="M16 18l6-6-6-6M8 6l-6 6 6 6" />
+                                </svg>
+                                <span>Code Editor</span>
+                            </div>
+                            <div class="panel-actions">
+                                <button
+                                    class="icon-btn"
+                                    id="copy-code"
+                                    title="Copy code"
+                                >
+                                    <svg
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                    >
+                                        <rect
+                                            x="9"
+                                            y="9"
+                                            width="13"
+                                            height="13"
+                                            rx="2"
+                                        />
+                                        <path
+                                            d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"
+                                        />
+                                    </svg>
+                                </button>
+                                <button
+                                    class="icon-btn"
+                                    id="fullscreen-editor"
+                                    title="Fullscreen"
+                                >
+                                    <svg
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                    >
+                                        <path
+                                            d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"
+                                        />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="editor-wrapper">
+                            <div class="line-numbers" id="line-numbers"></div>
+                            <textarea
+                                id="code-editor"
+                                spellcheck="false"
+                                autocomplete="off"
+                                autocorrect="off"
+                                autocapitalize="off"
+                                placeholder="% Welcome to MATLAB-Lite!
+% Write your control systems code here.
+%
+% Example - First Order System:
+num = [1];
+den = [1 4];
+G = tf(num, den);
+T = feedback(G, 1);
+step(T);
+grid on;
+title('Step Response');"
+                            ></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Output Panel -->
+                    <div class="panel output-panel">
+                        <div class="panel-header">
+                            <div class="tabs" id="output-tabs">
+                                <button class="tab active" data-tab="plots">
+                                    <svg
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                    >
+                                        <path d="M3 3v18h18" />
+                                        <path d="M18 9l-5 5-4-4-3 3" />
+                                    </svg>
+                                    <span>Plots</span>
+                                </button>
+                                <button class="tab" data-tab="console">
+                                    <svg
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                    >
+                                        <rect
+                                            x="2"
+                                            y="3"
+                                            width="20"
+                                            height="18"
+                                            rx="2"
+                                        />
+                                        <path d="M8 10l3 3-3 3M14 16h4" />
+                                    </svg>
+                                    <span>Console</span>
+                                </button>
+                                <button class="tab" data-tab="theory">
+                                    <svg
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                    >
+                                        <path
+                                            d="M4 19.5A2.5 2.5 0 016.5 17H20"
+                                        />
+                                        <path
+                                            d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"
+                                        />
+                                    </svg>
+                                    <span>Theory</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="tab-contents">
+                            <div class="tab-content active" id="tab-plots">
+                                <div class="plots-grid" id="plots-container">
+                                    <div class="empty-state">
+                                        <div class="empty-icon">📊</div>
+                                        <h3>No plots yet</h3>
+                                        <p>Run your code to see plots here</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-content" id="tab-console">
+                                <pre class="console" id="console-output">
+Welcome to MATLAB-Lite Control Systems IDE!
+
+Ready to execute code. Press "Run" or Ctrl+Enter to execute.
+
+Supported commands:
+• tf(num, den) - Create transfer function
+• feedback(G, H) - Closed-loop system
+• step(T), impulse(T) - Time responses
+• bode(G), margin(G) - Frequency response
+• rlocus(G), nyquist(G), pzmap(G) - Analysis plots
+• conv(a, b) - Polynomial multiplication
+• figure(n), grid on, title('...') - Plot formatting</pre
+                                >
+                            </div>
+                            <div class="tab-content" id="tab-theory">
+                                <div
+                                    class="theory-container"
+                                    id="theory-content"
+                                >
+                                    <div class="empty-state">
+                                        <div class="empty-icon">📖</div>
+                                        <h3>Select a Practical</h3>
+                                        <p>
+                                            Choose a practical from the sidebar
+                                            to see theory and explanations
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Explanation Sidebar -->
+            <aside class="explain-sidebar" id="explain-sidebar">
+                <div class="explain-header">
+                    <h3>💡 Line Explanations</h3>
+                    <button class="close-btn" id="close-explain">×</button>
+                </div>
+                <div class="explain-content" id="explain-content">
+                    <p class="explain-hint">
+                        Enable "Explain" mode and your code will be explained
+                        line by line here.
+                    </p>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Tutor Modal -->
+        <div class="modal-overlay" id="tutor-modal">
+            <div class="modal tutor-modal">
+                <div class="modal-header">
+                    <h2>🎓 Control System Tutor</h2>
+                    <button class="modal-close" id="close-tutor">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="tutor-nav">
+                        <div class="tutor-progress">
+                            <div class="progress-bar" id="tutor-progress"></div>
+                        </div>
+                        <div class="tutor-topics" id="tutor-topics">
+                            <!-- Generated by JS -->
+                        </div>
+                    </div>
+                    <div class="tutor-content" id="tutor-content">
+                        <!-- Content loaded by JS -->
+                    </div>
+                    <div class="tutor-footer">
+                        <button class="btn btn-secondary" id="tutor-prev">
+                            ← Previous
+                        </button>
+                        <span class="tutor-page" id="tutor-page">1 / 12</span>
+                        <button class="btn btn-primary" id="tutor-next">
+                            Next →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div class="loading-overlay" id="loading">
+            <div class="loading-spinner">
+                <div class="spinner"></div>
+                <p>Executing code...</p>
+            </div>
+        </div>
+
+        <!-- Toast -->
+        <div class="toast-container" id="toast-container"></div>
+
+        <script src="main.js"></script>
+    </body>
+</html>
