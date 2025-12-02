@@ -2,10 +2,13 @@
 // Complete Application JavaScript
 
 // ===== Configuration =====
+// Set USE_LOCAL to true for local development, false for Vercel
 const CONFIG = {
   API_URL: "/api/run",
   LOCAL_API: "http://localhost:5000/api/run",
-  USE_LOCAL: false, // Set to false for Vercel deployment
+  USE_LOCAL:
+    window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1",
 };
 
 // ===== Practicals Data =====

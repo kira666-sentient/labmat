@@ -3,21 +3,85 @@ import io
 import json
 import re
 import traceback
-from http.server import BaseHTTPRequestHandler
 
-# For Vercel, we need to handle imports carefully
-try:
-    import control as ctl
-    import matplotlib
-    import numpy as np
 
-    matplotlib.use("Agg")
-    import matplotlib.pyplot as plt
+# Vercel serverless function handler
+def handler(request):
+    # Handle CORS preflight
+    if request.method == "OPTIONS":
+        return {
+            "statusCode": 200,
+            "headers": {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "POST, OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type",
+            },
+            "body": "",
+        }
 
-    IMPORTS_AVAILABLE = True
-except ImportError as e:
-    IMPORTS_AVAILABLE = False
-    IMPORT_ERROR = str(e)
+    # Only allow POST
+    if request.method != "POST":
+        return {
+            "statusCode": 405,
+            "headers": {
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/json",
+            },
+            "body": json.dumps({"error": "Method not allowed"}),
+        }
+
+    try:
+        # Import heavy libraries inside handler for cold start optimization
+        import control as ctl
+        import matplotlib
+
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        import numpy as np
+
+        # Parse request body
+        body = request.body
+        if isinstance(body, bytes):
+            body = body.decode("utf-8")
+        data = json.loads(body)
+        code = data.get("code", "")
+
+        if not code.strip():
+            return create_response(
+                {
+                    "success": False,
+                    "plots": [],
+                    "console": "",
+                    "error": "No code provided",
+                }
+            )
+
+        # Execute the code
+        result = execute_matlab_code(code, ctl, plt, np)
+        return create_response(result)
+
+    except Exception as e:
+        return create_response(
+            {
+                "success": False,
+                "plots": [],
+                "console": "",
+                "error": f"Server error: {str(e)}\n{traceback.format_exc()}",
+            }
+        )
+
+
+def create_response(data):
+    return {
+        "statusCode": 200,
+        "headers": {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Content-Type": "application/json",
+        },
+        "body": json.dumps(data),
+    }
 
 
 def convert_vector(content):
@@ -185,14 +249,7 @@ def convert_matlab_to_python(matlab_code):
             python_lines.append(f"ctl.nyquist_plot({match.group(1)})")
             continue
 
-        # Handle step_info
-        match = re.match(r"(\w+)\s*=\s*stepinfo\s*\(\s*(\w+)\s*\)", line, re.IGNORECASE)
-        if match:
-            python_lines.append(f"{match.group(1)} = ctl.step_info({match.group(2)})")
-            python_lines.append(f"print({match.group(1)})")
-            continue
-
-        # Handle pole/zero
+        # Handle pole/zero functions
         line = re.sub(r"\bpole\s*\(", "ctl.poles(", line)
         line = re.sub(r"\bzero\s*\(", "ctl.zeros(", line)
 
@@ -203,7 +260,7 @@ def convert_matlab_to_python(matlab_code):
         # Handle dcgain
         line = re.sub(r"\bdcgain\s*\(", "ctl.dcgain(", line)
 
-        # Handle print/disp
+        # Handle disp as print
         match = re.match(r"disp\s*\(\s*(.+)\s*\)", line)
         if match:
             python_lines.append(f"print({match.group(1)})")
@@ -215,25 +272,17 @@ def convert_matlab_to_python(matlab_code):
     return "\n".join(python_lines)
 
 
-def execute_matlab_code(code):
+def execute_matlab_code(code, ctl, plt, np):
     """Execute MATLAB-like code and return results"""
-    if not IMPORTS_AVAILABLE:
-        return {
-            "success": False,
-            "plots": [],
-            "console": "",
-            "error": f"Required packages not available: {IMPORT_ERROR}",
-        }
+    import sys
+    from io import StringIO
 
     plots = []
     console_output = []
 
     plt.close("all")
 
-    # Capture print output
-    import sys
-    from io import StringIO
-
+    # Capture stdout
     old_stdout = sys.stdout
     sys.stdout = StringIO()
 
@@ -255,7 +304,7 @@ def execute_matlab_code(code):
         if print_output:
             console_output.append(f"\n# Output:\n{print_output}")
 
-        # Capture all figures
+        # Capture all figures as PNG
         for fig_num in plt.get_fignums():
             fig = plt.figure(fig_num)
             buf = io.BytesIO()
@@ -286,45 +335,3 @@ def execute_matlab_code(code):
             "console": "\n".join(console_output),
             "error": error_msg,
         }
-
-
-class handler(BaseHTTPRequestHandler):
-    def do_POST(self):
-        content_length = int(self.headers["Content-Length"])
-        post_data = self.rfile.read(content_length)
-
-        try:
-            data = json.loads(post_data.decode("utf-8"))
-            code = data.get("code", "")
-
-            if not code.strip():
-                result = {
-                    "success": False,
-                    "plots": [],
-                    "console": "",
-                    "error": "No code provided",
-                }
-            else:
-                result = execute_matlab_code(code)
-
-            self.send_response(200)
-            self.send_header("Content-Type", "application/json")
-            self.send_header("Access-Control-Allow-Origin", "*")
-            self.end_headers()
-            self.wfile.write(json.dumps(result).encode("utf-8"))
-
-        except Exception as e:
-            self.send_response(500)
-            self.send_header("Content-Type", "application/json")
-            self.send_header("Access-Control-Allow-Origin", "*")
-            self.end_headers()
-            self.wfile.write(
-                json.dumps({"success": False, "error": str(e)}).encode("utf-8")
-            )
-
-    def do_OPTIONS(self):
-        self.send_response(200)
-        self.send_header("Access-Control-Allow-Origin", "*")
-        self.send_header("Access-Control-Allow-Methods", "POST, OPTIONS")
-        self.send_header("Access-Control-Allow-Headers", "Content-Type")
-        self.end_headers()

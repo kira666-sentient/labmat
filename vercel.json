@@ -2,11 +2,11 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/*.py",
+      "src": "api/run.py",
       "use": "@vercel/python"
     },
     {
-      "src": "index.html",
+      "src": "*.html",
       "use": "@vercel/static"
     },
     {
@@ -18,32 +18,14 @@
       "use": "@vercel/static"
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
+      "source": "/api/run",
+      "destination": "/api/run"
     },
     {
-      "src": "/(.*\\.css)",
-      "dest": "/$1"
-    },
-    {
-      "src": "/(.*\\.js)",
-      "dest": "/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/api/(.*)",
-      "headers": [
-        { "key": "Access-Control-Allow-Origin", "value": "*" },
-        { "key": "Access-Control-Allow-Methods", "value": "GET, POST, OPTIONS" },
-        { "key": "Access-Control-Allow-Headers", "value": "Content-Type" }
-      ]
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
